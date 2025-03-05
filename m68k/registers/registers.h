@@ -30,16 +30,17 @@ struct addreg{
   unsigned char a4;
   unsigned char a5;
   unsigned char a6;
-}
+}addreg;
 
 //stack pointers
 struct stackpointers{
   unsigned char a7u; //user stack pointer
   unsigned char a7s; //supervisor stack pointer
-}
+}stackpointers;
 
 //program counter
 struct programcounter{
   unsigned char pc;
-}
+}programcounter;
+
 #endif
