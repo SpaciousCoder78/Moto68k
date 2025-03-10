@@ -2,45 +2,45 @@
 * File Name: registers.h
 * Author: Aryan Karamtoth
 * Date Created: 05 Mar 2025
-* Last Modified: 05 Mar 2025
+* Last Modified: 10 Mar 2025
 * License: MIT
 */
-
+#include <stdint.h>
 #ifndef REGISTERS_H
 #define REGISTERS_H
 
 //Definining data registers of 68k
 struct datareg{
-  unsigned char d0;
-  unsigned char d1;
-  unsigned char d2;
-  unsigned char d3;
-  unsigned char d4;
-  unsigned char d5;
-  unsigned char d6;
-  unsigned char d7;
-}datareg;
+  uint32_t d0;
+  uint32_t d1;
+  uint32_t d2;
+  uint32_t d3;
+  uint32_t d4;
+  uint32_t d5;
+  uint32_t d6;
+  uint32_t d7;
+};
 
 //address registers
 struct addreg{
-  unsigned char a0;
-  unsigned char a1;
-  unsigned char a2;
-  unsigned char a3;
-  unsigned char a4;
-  unsigned char a5;
-  unsigned char a6;
-}addreg;
+  uint32_t a0;
+  uint32_t a1;
+  uint32_t a2;
+  uint32_t a3;
+  uint32_t a4;
+  uint32_t a5;
+  uint32_t a6;
+};
 
 //stack pointers
 struct stackpointers{
-  unsigned char a7u; //user stack pointer
-  unsigned char a7s; //supervisor stack pointer
-}stackpointers;
+  uint32_t a7u; //user stack pointer
+  uint32_t a7s; //supervisor stack pointer
+};
 
 //program counter
 struct programcounter{
-  unsigned char pc;
-}programcounter;
+  uint32_t pc;
+};
 
 #endif
