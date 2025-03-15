@@ -7,6 +7,8 @@
 */
 
 #include <stdint.h>
+#include "../flags/flags.h"
+#include "../registers/registers.h"
 #ifndef IA_H
 #define IA_H
 
@@ -24,14 +26,14 @@ void MOVEUSP(uint32_t *dest, uint32_t *src);
 //==============Arithmetic instructions================
 
 //ADD
-void ADD(uint32_t *dest, uint32_t *src);
+void ADD(uint32_t *dest, uint32_t *src, struct cpu_flags *flags);
 void ADDA(uint32_t *dest, uint32_t *src);
 void ADDI(uint32_t *dest, uint32_t *src);
 void ADDQ(uint32_t *dest, uint32_t *src);
 void ADDX(uint32_t *dest, uint32_t *src);
 
 //Subtraction
-void SUB(uint32_t *dest, uint32_t *src);
+void SUB(uint32_t *dest, uint32_t *src, struct cpu_flags *flags);
 void SUBA(uint32_t *dest, uint32_t *src);
 void SUBI(uint32_t *dest, uint32_t *src);
 void SUBQ(uint32_t *dest, uint32_t *src);
@@ -52,5 +54,8 @@ void MULU(uint32_t *dest, uint32_t *src);
 void DIVS(uint32_t *dest, uint32_t *src);
 void DIVU(uint32_t *dest, uint32_t *src);
 
-
+//Branching
+void BRA(struct programcounter *pc, int16_t offset);
+void BCC(struct programcounter *pc, struct cpu_flags *flags, int16_t offset);
+void BNE(struct programcounter *pc, struct cpu_flags *flags, int16_t offset);
 #endif
