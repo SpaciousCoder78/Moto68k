@@ -1,4 +1,4 @@
-#define _DEFAULT_SOURCE
+
 #define _BSD_SOURCE
 #define _GNU_SOURCE
 
@@ -376,16 +376,3 @@ void initEditor() {
   		die("getWindowSize");
 }
 
-int main(int argc, char *argv[]){
-	enterRawMode();
-	initEditor();
-	if(argc >= 2){
-		editorFileOpen(argv[1]);
-	}
-	while (1) {
-		editorRefreshScreen();
-    	editorKeyPress();
-	}
-
-	return 0;
-}
