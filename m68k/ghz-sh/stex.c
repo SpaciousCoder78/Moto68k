@@ -88,10 +88,10 @@ int keyRead() {
                 }
             } else {
                 switch (seq[1]) {
-                    case 'A': return 1000 + 0; // ARROW_UP
-                    case 'B': return 1000 + 1; // ARROW_DOWN
-                    case 'C': return 1000 + 2; // ARROW_RIGHT
-                    case 'D': return 1000 + 3; // ARROW_LEFT
+                    case 'A': return 1000 + 0;
+                    case 'B': return 1000 + 1;
+                    case 'C': return 1000 + 2;
+                    case 'D': return 1000 + 3;
                     case 'H': return 'H';
                     case 'F': return 'E';
                 }
@@ -176,9 +176,13 @@ void editorAppendRow(char *s, size_t len) {
 void editorFileOpen(char *filename) {
     editorFilename = strdup(filename);
     FILE *f = fopen(filename, "r");
-    if (!f)
+    if (!f) {
+        if (errno == ENOENT) {
+            // File not found -> initialize with an empty file
+            return;
+        }
         die("fopen");
-
+    }
     char *line = NULL;
     size_t linecap = 0;
     ssize_t linelen;
@@ -206,19 +210,19 @@ void editorSave() {
 
 void editorMoveCursor(int key) {
     switch (key) {
-        case 1000 + 0: // ARROW_UP
+        case 1000 + 0:
             if (E.cy != 0)
                 E.cy--;
             break;
-        case 1000 + 1: // ARROW_DOWN
+        case 1000 + 1:
             if (E.cy < E.numRows - 1)
                 E.cy++;
             break;
-        case 1000 + 2: // ARROW_RIGHT
+        case 1000 + 2:
             if (E.cx < E.screencols - 1)
                 E.cx++;
             break;
-        case 1000 + 3: // ARROW_LEFT
+        case 1000 + 3:
             if (E.cx != 0)
                 E.cx--;
             break;
@@ -339,7 +343,7 @@ void initEditor() {
         die("getWindowSize");
 }
 
-/*int main(int argc, char **argv) {
+int main(int argc, char **argv) {
     enterRawMode();
     initEditor();
     if (argc >= 2)
@@ -349,4 +353,4 @@ void initEditor() {
         editorKeyPress();
     }
     return 0;
-}*/
+}
