@@ -298,7 +298,7 @@ void editorDrawRows(struct abuf *ab) {
                     welcomelen = E.screencols;
                 int padding = (E.screencols - welcomelen) / 2;
                 if (padding) {
-                    abAppend(ab, "~", 1);
+                    abAppend(ab, "\x1b[0m~", 5);
                     padding--;
                 }
                 while (padding--)
@@ -348,6 +348,9 @@ void initEditor() {
     initEditor();
     if (argc >= 2)
         editorFileOpen(argv[1]);
+    // If no content exists, add an empty row for text editing.
+    if (E.numRows == 0)
+        editorAppendRow("", 0);
     while (1) {
         editorRefreshScreen();
         editorKeyPress();
