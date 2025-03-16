@@ -4,7 +4,7 @@
  *
  * @author           Aryan Karamtoth (SpaciousCoder78)
  *
- * @date             Thursday, March 16 2024
+ * @date             Sunday, March 16 2024
  *
  * @brief            Gigahertz Shell's Command Functions
  *
@@ -41,7 +41,7 @@ int (*builtin_func[]) (char **) = {
   &ghzsh_chdir, //change directory
   &ghzsh_sos, //help command
   &ghzsh_leave, //exit command
-  &ghzsh_tell
+  &ghzsh_tell,
   &ghzsh_stex//tell command
 };
 
@@ -144,17 +144,16 @@ int ghzsh_leave(char **args)
   return 0;
 }
 
-int ghzsh_stex(int argc, char *argv[]) {
-    enterRawMode();
-    initEditor();
-    if(argc >= 2){
-      editorFileOpen(argv[1]);
-    }
-    while (1) {
-      editorRefreshScreen();
-      editorKeyPress();
-    }
-
-    return 0;
+int ghzsh_stex(char **args) {
+  enterRawMode();
+  initEditor();
+  if (args[1] != NULL) {
+    editorFileOpen(args[1]);
+  }
+  while (1) {
+    editorRefreshScreen();
+    editorKeyPress();
+  }
+  return 0;
 }
 #endif
