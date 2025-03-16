@@ -344,17 +344,3 @@ void initEditor() {
         die("getWindowSize");
 }
 
-/*int main(int argc, char **argv) {
-    enterRawMode();
-    initEditor();
-    if (argc >= 2)
-        editorFileOpen(argv[1]);
-    // Ensure there is at least one row for editing.
-    if (E.numRows == 0)
-        editorAppendRow("", 0);
-    while (1) {
-        editorRefreshScreen();
-        editorKeyPress();
-    }
-    return 0;
-}*/
