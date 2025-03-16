@@ -4,13 +4,13 @@
  *
  * @author           Aryan Karamtoth (SpaciousCoder78)
  *
- * @date             Thursday, October 15 2024
+ * @date             Thursday, March 16 2024
  *
  * @brief            Gigahertz Shell's Command Functions
  *
  ****************************************************/
 
-
+#include "stex.c"
 
 #ifndef COMMANDS_H
 #define COMMANDS_H
@@ -24,6 +24,7 @@ int ghzsh_chdir(char **args); //change directory
 int ghzsh_sos(char **args); //help command
 int ghzsh_leave(char **args); //exit command
 int ghzsh_tell(char **args); //tell command
+int ghzsh_stex(char **args); //stex editor
 
 /*
   List of builtin commands, followed by their corresponding functions.
@@ -32,14 +33,16 @@ char *builtin_str[] = {
   "chdir", //change directory
   "sos", //help command
   "leave", //exit command
-  "tell" //tell command
+  "tell",
+  "stex"//tell command
 };
 
 int (*builtin_func[]) (char **) = {
   &ghzsh_chdir, //change directory
   &ghzsh_sos, //help command
   &ghzsh_leave, //exit command
-  &ghzsh_tell //tell command
+  &ghzsh_tell
+  &ghzsh_stex//tell command
 };
 
 int ghzsh_num_builtins() {
@@ -141,4 +144,17 @@ int ghzsh_leave(char **args)
   return 0;
 }
 
+int ghzsh_stex(int argc, char *argv[]) {
+    enterRawMode();
+    initEditor();
+    if(argc >= 2){
+      editorFileOpen(argv[1]);
+    }
+    while (1) {
+      editorRefreshScreen();
+      editorKeyPress();
+    }
+
+    return 0;
+}
 #endif
