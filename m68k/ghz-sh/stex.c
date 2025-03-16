@@ -339,7 +339,7 @@ void initEditor() {
         die("getWindowSize");
 }
 
-int main(int argc, char **argv) {
+/*int main(int argc, char **argv) {
     enterRawMode();
     initEditor();
     if (argc >= 2)
@@ -349,4 +349,4 @@ int main(int argc, char **argv) {
         editorKeyPress();
     }
     return 0;
-}
+}*/
