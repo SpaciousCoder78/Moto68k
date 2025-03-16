@@ -232,8 +232,9 @@ void editorMoveCursor(int key) {
 }
 
 void editorInsertChar(int c) {
-    if (E.cy >= E.numRows)
-        return;
+    // If current row does not exist, create an empty row.
+    if (E.cy == E.numRows)
+        editorAppendRow("", 0);
     struct erow *row = &E.row[E.cy];
     row->chars = realloc(row->chars, row->size + 2);
     memmove(&row->chars[E.cx + 1], &row->chars[E.cx], row->size - E.cx + 1);
@@ -348,7 +349,7 @@ void initEditor() {
     initEditor();
     if (argc >= 2)
         editorFileOpen(argv[1]);
-    // If no content exists, add an empty row for text editing.
+    // Ensure there is at least one row for editing.
     if (E.numRows == 0)
         editorAppendRow("", 0);
     while (1) {
